@@ -56,3 +56,29 @@
 
 - Owns all appointment validation rules
 - No business rules in controllers
+
+## API Endpoints Map
+
+### Users
+
+POST /users → Create user
+GET /users/{id} → Get user by id
+
+### Professionals
+
+POST /professionals
+GET /professionals/{id}
+
+### Appointments
+
+POST /appointments
+
+- Controller: AppointmentRouter
+- Service: SchedulingSevice
+- Responsibility: create Appointments and validade conflicts
+  GET /appointments
+  GET /appointments/{id}
+
+### health
+
+GET /health
