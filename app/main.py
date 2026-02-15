@@ -1,12 +1,19 @@
-
 from fastapi import FastAPI
 
-app = FastAPI(  # FastAPI == class main in framework
+# Application instance
+# This file acts as the entry point of the API
+app = FastAPI(
   title="scheduling system api",
   description="API for managing professional scheduling with conflict validation",
   version="1.0.0"
 )
 
-@app.get("/health") # decorator a reponse the request HTTP GET in path /health  (get: read, /health: check endpoint )
-def health_check(): # funcion for check if the API is up and running
+@app.get("/health") 
+def health_check(): 
+  """
+  Health check endpoint.
+
+  Used to verify if the application is running and responding.
+  Commonly consumed by monitoring tools or during deployment.
+  """
   return {"status": "ok"}
