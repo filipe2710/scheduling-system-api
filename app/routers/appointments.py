@@ -15,6 +15,8 @@ def create_appointment(appointment: Appointmentcreate):
   
   if not is_available:
     raise HTTPException(status_code=400, detail="time slot not avaiable")
+ 
+  scheduling_service.create_appointment(appointment)
   
   return {
     "message": "appointment created successfully",
