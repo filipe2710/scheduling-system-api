@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 
+from app.routers import appointments
+
 # Application instance
 # This file acts as the entry point of the API
 app = FastAPI(
@@ -7,6 +9,8 @@ app = FastAPI(
   description="API for managing professional scheduling with conflict validation",
   version="1.0.0"
 )
+
+app.include_router(appointments.router)
 
 @app.get("/health") 
 def health_check(): 
