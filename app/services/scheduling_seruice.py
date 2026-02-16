@@ -19,7 +19,18 @@ class SchedulingService:
       
     return True
   
+  def validate_time_range(self, appointment):
+    """Ensures start time is before end time."""
+    if appointment.start_time >= appointment.ene_time:
+      return False
+    return True
+  
   def create_appointment(self, appointment: Appointmentcreate):
     """Stores the appointment in memory"""
     
     self.appointments.append(appointment)
+    
+  def list_appointment(self):
+    """Return all scheduling appointmets"""  
+    return self.appointments
+  

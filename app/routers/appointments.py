@@ -13,8 +13,8 @@ def create_appointment(appointment: Appointmentcreate):
   
   is_available = scheduling_service.validate_availability(appointment)
   
-  if not is_available:
-    raise HTTPException(status_code=400, detail="time slot not avaiable")
+  if not scheduling_service.validate_time_range(appointment):
+    raise HTTPException(status_code=400, detail="Start time must be before end time")
  
   scheduling_service.create_appointment(appointment)
   
@@ -22,3 +22,8 @@ def create_appointment(appointment: Appointmentcreate):
     "message": "appointment created successfully",
     "appointment": appointment,
   }
+  
+@router.get("/")
+def get_appointments():
+  """Return all appointments"""
+  return scheduling_service.list_appointment()
