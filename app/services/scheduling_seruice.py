@@ -21,7 +21,7 @@ class SchedulingService:
   
   def validate_time_range(self, appointment):
     """Ensures start time is before end time."""
-    if appointment.start_time >= appointment.ene_time:
+    if appointment.start_time >= appointment.end_time:
       return False
     return True
   
