@@ -14,10 +14,5 @@ app.include_router(appointments.router)
 
 @app.get("/health") 
 def health_check(): 
-  """
-  Health check endpoint.
-
-  Used to verify if the application is running and responding.
-  Commonly consumed by monitoring tools or during deployment.
-  """
+  """Health check endpoint by monitoring tools."""
   return {"status": "ok"}

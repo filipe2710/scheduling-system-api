@@ -25,12 +25,9 @@ class SchedulingService:
       return False
     return True
   
-  def create_appointment(self, appointment: Appointmentcreate):
-    """Stores the appointment in memory"""
-    
+  def create_appointment(self, appointment: Appointmentcreate):   
     self.appointments.append(appointment)
     
   def list_appointment(self):
-    """Return all scheduling appointmets"""  
     return self.appointments
   
