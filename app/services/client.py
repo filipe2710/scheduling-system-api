@@ -9,3 +9,6 @@ class ClientService:
     
   def create_client(self, client: ClientCreate):
     self.clients.append(client)
+    
+  def list_client(self):
+    return self.clients
