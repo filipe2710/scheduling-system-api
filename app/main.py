@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.routers import appointments
+from app.routers import appointments, client
 
 # Application instance
 # This file acts as the entry point of the API
@@ -11,6 +11,7 @@ app = FastAPI(
 )
 
 app.include_router(appointments.router)
+app.include_router(client.router)
 
 @app.get("/health") 
 def health_check(): 
