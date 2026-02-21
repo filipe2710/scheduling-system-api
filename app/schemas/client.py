@@ -26,3 +26,13 @@ class ClientCreate(BaseModel):
       raise ValueError("phone must have 10 or 11 digits")
     
     return phone
+  
+  @field_validator("phone", mode="before")
+  @classmethod
+  def formalize_cpf(cls, cpf: str) -> str:
+    cpf = re.sub(r"\D", "", cpf)
+    
+    if len(cpf) != 11:
+      raise ValueError("cpf must have 11 digits")
+    
+    return cpf
