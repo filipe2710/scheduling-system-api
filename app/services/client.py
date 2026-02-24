@@ -42,11 +42,12 @@ class ClientService:
         return client
     return None
         
-  def delete_client_by_id(self, client_id: str) -> Optional[None]:
-    for client in self.clients:
+  def delete_client_by_id(self, client_id: str) -> bool:
+    for index, client in enumerate(self.clients):
       if client_id == client.id:
-        del self.clients[client_id]
-    return None
+        del self.clients[index]
+        return True
+    return False
         
   def _calculate_age(self, date_of_birth):
     pass
