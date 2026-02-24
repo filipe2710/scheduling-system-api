@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, status, HTTPException
 
 from app.schemas.client_create import ClientCreate
 from app.schemas.client_read import Client_Read
@@ -18,3 +18,12 @@ def create_client(client: ClientCreate):
 @router.get("/", response_model=list[Client_Read])
 def get_clients():
   return client_service.list_client()
+
+@router.get("/{client_id}", response_model=Client_Read)
+def get_client_by_id(client_id: str):
+  client = client_service.get_client_by_id(client_id)
+    
+  if client is None:
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Client not found")
+  
+  return client
