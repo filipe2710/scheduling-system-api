@@ -42,6 +42,12 @@ class ClientService:
         return client
     return None
         
+  def delete_client_by_id(self, client_id: str) -> Optional[None]:
+    for client in self.clients:
+      if client_id == client.id:
+        del self.clients[client_id]
+    return None
+        
   def _calculate_age(self, date_of_birth):
     pass
   
