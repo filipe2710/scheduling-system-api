@@ -1,5 +1,5 @@
 from typing import List
-from app.schemas.client import ClientCreate
+from app.schemas.client_create import ClientCreate
 
 class ClientService:
   """Class control services of clients"""
