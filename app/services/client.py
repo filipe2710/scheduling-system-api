@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from pydantic import Field
 from uuid import uuid4
 from app.schemas.client_create import ClientCreate
@@ -27,6 +27,21 @@ class ClientService:
   def list_client(self) -> list[Client_Read]:
     return self.clients
   
+  def get_client_by_id(self, client_id: str) -> Optional[Client_Read]:
+    """
+    Retrieve a client by its unique identifier.
+
+    Args:
+        client_id (str): The client's UUID.
+
+    Returns:
+        Client_Read | None: The client if found, otherwise None.
+    """
+    for client in self.clients:
+      if client_id == client.id:
+        return client
+    return None
+        
   def _calculate_age(self, date_of_birth):
     pass
   
