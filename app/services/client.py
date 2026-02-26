@@ -47,7 +47,23 @@ class ClientService:
       if client_id == client.id:
         del self.clients[index]
         return True
-    return False
+    return 
+  
+  def put_client_by_id(self, client_id: str, item: ClientCreate) -> bool:
+   for index, client in enumerate(self.clients):
+     if client_id == client.id:
+       updated_client = Client_Read(
+        id=client.id,
+        name=item.name,
+        phone=item.phone,
+        date_of_birth=item.date_of_birth,
+        cpf=item.cpf,
+        gender=item.gender,
+        age=self._calculate_age(item.date_of_birth)
+        )
+       self.clients[index] = updated_client
+       return True
+   return False
         
   def _calculate_age(self, date_of_birth):
     pass
