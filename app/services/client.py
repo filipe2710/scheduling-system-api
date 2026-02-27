@@ -49,7 +49,7 @@ class ClientService:
         return True
     return 
   
-  def put_client_by_id(self, client_id: str, item: ClientCreate) -> bool:
+  def put_client_by_id(self, client_id: str, item: ClientCreate) -> Optional[Client_Read]:
    for index, client in enumerate(self.clients):
      if client_id == client.id:
        updated_client = Client_Read(
