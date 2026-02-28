@@ -1,4 +1,5 @@
 from typing import List, Optional
+from datetime import date
 from pydantic import Field
 from uuid import uuid4
 from app.schemas.client_create import ClientCreate
@@ -65,6 +66,12 @@ class ClientService:
        return True
    return False
         
-  def _calculate_age(self, date_of_birth):
-    pass
-  
+  def _calculate_age(self, date_of_birth: date) -> int:
+    today = date.today()
+    age = today.year - date_of_birth.year
+    
+    if (today.month, today.day) < (date_of_birth.month, date_of_birth.day):
+      age -= 1
+      
+    return age
+    
