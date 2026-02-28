@@ -10,10 +10,10 @@ client_service = ClientService()
 
 @router.post("/", response_model=Client_Read, status_code=status.HTTP_201_CREATED)
 def create_client(client: ClientCreate):
-  """Create a new client"""
+  """Create a new client"""  
+  new_client = client_service.create_client(client)
   
-  client_service.create_client(client)
-  
+  return new_client
   
 @router.get("/", response_model=list[Client_Read])
 def get_clients():
