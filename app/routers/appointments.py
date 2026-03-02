@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, status
 
 from app.schemas.appointment import AppointmentCreate
 from app.services.scheduling_seruice import SchedulingService
@@ -7,10 +7,8 @@ router = APIRouter(prefix="/appointments", tags=["Appointments"])
 
 scheduling_service = SchedulingService()
 
-@router.post("/")
+@router.post("/", response_model=AppointmentCreate, status_code=status.HTTP_201_CREATED, summary="Create a new appointment", description="Create a new appointment after validating availability")
 def create_appointment(appointment: AppointmentCreate):
-  """Create a new appointment after validating availability"""
-    
   if not scheduling_service.validate_time_range(appointment):
     raise HTTPException(status_code=400, detail="Start time must be before end time")
  
