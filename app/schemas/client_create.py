@@ -12,6 +12,17 @@ class ClientCreate(BaseModel):
   cpf: str
   gender: Literal["Masculino", "Feminino"]
   
+  class Config:
+    json_schema_extra = {
+      "example": {
+        "name": "Filipe",
+        "phone": "11999999999",
+        "date_of_birth": "2005-02-03",
+        "cpf": "12345678991",
+        "gender": "Masculino"
+      }
+    }
+  
   @field_validator("gender", mode="before")
   @classmethod
   def formalization_gender(cls, value: str) -> str:
