@@ -1,7 +1,7 @@
 from datetime import datetime
 from pydantic import BaseModel
 
-class Appointmentcreate(BaseModel):
+class AppointmentCreate(BaseModel):
   """Schema used to create a new appointment."""
   
   user_id: int

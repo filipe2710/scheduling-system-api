@@ -1,18 +1,18 @@
 from typing import List, Optional
 from datetime import date
-from pydantic import Field
 from uuid import uuid4
+
 from app.schemas.client_create import ClientCreate
-from app.schemas.client_read import Client_Read
+from app.schemas.client_read import ClientRead
 
 class ClientService:
   """Class control services of clients"""
   
   def __init__(self):
-    self.clients: List[Client_Read] = []
+    self.clients: List[ClientRead] = []
     
-  def create_client(self, client: ClientCreate) -> Client_Read:
-    client_read = Client_Read(
+  def create_client(self, client: ClientCreate) -> ClientRead:
+    client_read = ClientRead(
       id=str(uuid4()),
       name=client.name,
       phone=client.phone,
@@ -25,10 +25,10 @@ class ClientService:
     self.clients.append(client_read)
     return client_read
     
-  def list_client(self) -> list[Client_Read]:
+  def list_client(self) -> list[ClientRead]:
     return self.clients
   
-  def get_client_by_id(self, client_id: str) -> Optional[Client_Read]:
+  def get_client_by_id(self, client_id: str) -> Optional[ClientRead]:
     """
     Retrieve a client by its unique identifier.
 
@@ -36,7 +36,7 @@ class ClientService:
         client_id (str): The client's UUID.
 
     Returns:
-        Client_Read | None: The client if found, otherwise None.
+        ClientRead | None: The client if found, otherwise None.
     """
     for client in self.clients:
       if client_id == client.id:
@@ -50,10 +50,10 @@ class ClientService:
         return True
     return 
   
-  def put_client_by_id(self, client_id: str, item: ClientCreate) -> Optional[Client_Read]:
+  def put_client_by_id(self, client_id: str, item: ClientCreate) -> Optional[ClientRead]:
    for index, client in enumerate(self.clients):
      if client_id == client.id:
-       updated_client = Client_Read(
+       updated_client = ClientRead(
         id=client.id,
         name=item.name,
         phone=item.phone,

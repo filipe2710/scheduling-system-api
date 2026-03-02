@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from app.schemas.appointment import Appointmentcreate
+from app.schemas.appointment import AppointmentCreate
 from app.services.scheduling_seruice import SchedulingService
 
 router = APIRouter(prefix="/appointments", tags=["Appointments"])
@@ -8,7 +8,7 @@ router = APIRouter(prefix="/appointments", tags=["Appointments"])
 scheduling_service = SchedulingService()
 
 @router.post("/")
-def create_appointment(appointment: Appointmentcreate):
+def create_appointment(appointment: AppointmentCreate):
   """Create a new appointment after validating availability"""
     
   if not scheduling_service.validate_time_range(appointment):

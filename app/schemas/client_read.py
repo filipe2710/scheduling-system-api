@@ -1,7 +1,9 @@
 from pydantic import BaseModel
 from datetime import date
 
-class Client_Read(BaseModel):
+class ClientRead(BaseModel):
+  """Schema used to read a new client."""
+  
   id: str
   name: str
   age: int
