@@ -2,19 +2,21 @@
 
 RESTful API for managing professional appointments, designed for small businesses such as clinics, aesthetic centers, and consulting services.
 
-This project focuses on **domain modeling**, **business rules**, and **clean backend architecture**, aiming to simulate a real-world scheduling system.
+This project focuses on **domain modeling**, **business rule enforcement**, and **clean backend architecture**, simulating a real-world scheduling system with realistic constraints and validation scenarios.
 
 ---
 
 ## 🚀 Features
 
-- Client management
-- Professional management
-- Service management
+- Client management (CRUD)
+- Professional management (CRUD)
+- Service management (CRUD)
 - Appointment creation and management
 - Automatic time conflict validation
+- Automatic end-time calculation based on service duration
 - Appointment status control
-- Basic reports
+- Business rule enforcement
+- Automated tests for critical scenarios
 
 ---
 
@@ -24,9 +26,10 @@ This project was built to practice and demonstrate:
 
 - Layered architecture
 - Clear separation of responsibilities
-- Isolated business rules
-- Data persistence using ORM
-- Automated testing of critical rules
+- Isolation of business rules from HTTP layer
+- Validation and serialization with Pydantic
+- Automated testing using Pytest
+- Clean and maintainable project structure
 
 ---
 
@@ -37,7 +40,7 @@ This project was built to practice and demonstrate:
 - Appointments cannot be scheduled in the past
 - Only active clients, professionals, and services can be used
 - Appointment status must be valid
-- Cancellations keep historical data
+- Cancellations preserve historical data
 - Rescheduling creates a new appointment and cancels the previous one
 
 ---
@@ -46,16 +49,17 @@ This project was built to practice and demonstrate:
 
 - Python 3.11+
 - FastAPI
-- SQLAlchemy
-- SQLite
 - Pydantic
 - Pytest
 - Uvicorn
+
+> Database integration (SQLAlchemy + SQLite) planned for the next phase.
 
 ---
 
 ## 🏗️ Project Architecture
 
+```
 app/
 ├── main.py
 ├── core/
@@ -67,16 +71,17 @@ app/
 ├── routers/
 ├── validators/
 └── tests/
+```
 
 ### Responsibilities
 
-- `models/` → database entities
-- `schemas/` → data validation and serialization
-- `repositories/` → database access
-- `services/` → business rules
-- `routers/` → API endpoints
-- `validators/` → auxiliary validations
-- `tests/` → automated tests
+- `models/` → Database entities (future ORM layer)
+- `schemas/` → Data validation and serialization
+- `repositories/` → Database access abstraction (planned)
+- `services/` → Business rules and domain logic
+- `routers/` → API endpoints (HTTP layer)
+- `validators/` → Auxiliary validation logic
+- `tests/` → Automated test suite
 
 ---
 
@@ -112,13 +117,100 @@ app/
 
 ## 🧪 Testing
 
-Tests focus on:
+Tests focus on critical business validations:
 
-- Time conflict validation
+- Time conflict detection
 - Automatic duration calculation
 - Past date validation
 - Status validation
-- Valid appointment creation
+- Valid appointment creation flow
+
+Run tests with:
+
+```
+pytest
+```
+
+---
+
+## ▶ How to Run
+
+### 1. Clone the repository
+
+```
+git clone <your-repository-url>
+cd scheduling-system-api
+```
+
+### 2. Create virtual environment
+
+```
+python -m venv venv
+```
+
+### 3. Activate virtual environment
+
+**Windows:**
+
+```
+venv\Scripts\activate
+```
+
+**Linux / macOS:**
+
+```
+source venv/bin/activate
+```
+
+### 4. Install dependencies
+
+```
+pip install -r requirements.txt
+```
+
+### 5. Run the application
+
+```
+uvicorn app.main:app --reload
+```
+
+API will be available at:
+
+```
+http://localhost:8000
+```
+
+Swagger documentation:
+
+```
+http://localhost:8000/docs
+```
+
+ReDoc documentation:
+
+```
+http://localhost:8000/redoc
+```
+
+---
+
+## 🧩 Design Decisions
+
+- Layered architecture to separate HTTP, business logic, and data access
+- Services contain all domain rules
+- Routers handle only HTTP concerns
+- Validation logic is isolated for maintainability
+- Clear folder structure to simulate scalable backend projects
+
+---
+
+## 🚧 Project Status
+
+In active development.
+
+- Client module completed
+- Appointment module under refinement
+- Database persistence layer planned
 
 ---
 
@@ -126,11 +218,11 @@ Tests focus on:
 
 ### Included
 
-- Functional API
-- Automated tests
+- Functional REST API
 - Clean architecture
-- Complete documentation
-- Swagger UI
+- Business rule enforcement
+- Automated tests
+- Swagger documentation
 
 ### Out of Scope
 
@@ -145,4 +237,4 @@ Tests focus on:
 
 ## 📂 Purpose
 
-This project was created as a **portfolio project** to consolidate backend development skills using Python and FastAPI, focusing on real business rules and professional code organization.
+This project was created as a **portfolio project** to consolidate backend development skills using Python and FastAPI, focusing on realistic business rules and professional backend structure.
