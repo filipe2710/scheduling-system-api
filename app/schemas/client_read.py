@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import date
 
 class ClientRead(BaseModel):
@@ -12,7 +12,7 @@ class ClientRead(BaseModel):
   cpf: str
   gender: str
   
-  class Config:
+  model_config = ConfigDict(
       json_schema_extra = {
           "example": {
               "id": "uuid-string",
@@ -24,3 +24,4 @@ class ClientRead(BaseModel):
               "gender": "Masculino"
           }
       }
+  )

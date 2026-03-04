@@ -1,4 +1,4 @@
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, field_validator, ConfigDict
 from datetime import date
 from typing import Literal
 import re
@@ -12,7 +12,7 @@ class ClientCreate(BaseModel):
   cpf: str
   gender: Literal["Masculino", "Feminino"]
   
-  class Config:
+  model_config = ConfigDict(
     json_schema_extra = {
       "example": {
         "name": "Filipe",
@@ -22,6 +22,7 @@ class ClientCreate(BaseModel):
         "gender": "Masculino"
       }
     }
+  )
   
   @field_validator("gender", mode="before")
   @classmethod
