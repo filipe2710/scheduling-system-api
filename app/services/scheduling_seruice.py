@@ -1,13 +1,13 @@
 from typing import List
-from app.schemas.appointment import Appointmentcreate
+from app.schemas.appointment import AppointmentCreate
 
 class SchedulingService:
   """Service responsible for scheduling business rules"""
   
   def __init__(self):
-    self.appointments: List[Appointmentcreate] = []
+    self.appointments: List[AppointmentCreate] = []
   
-  def validate_availability(self, new_appointment: Appointmentcreate) -> bool:
+  def validate_availability(self, new_appointment: AppointmentCreate) -> bool:
     """ validates if a professional is available for the given time slot. """
     
     for appointment in self.appointments:
@@ -25,7 +25,7 @@ class SchedulingService:
       return False
     return True
   
-  def create_appointment(self, appointment: Appointmentcreate):   
+  def create_appointment(self, appointment: AppointmentCreate):   
     self.appointments.append(appointment)
     
   def list_appointment(self):
