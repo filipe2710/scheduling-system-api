@@ -31,6 +31,21 @@ class AppointmentService:
     self.appointments.append(appointment_read)
     return appointment_read
   
+  def get_appointment_by_id(self, appointment_id: str) -> Optional[AppointmentRead]:
+    """
+    Retrieve an appointment by its unique identifier.
+
+    Args:
+        appointment_id (str): The appointment's UUID.
+
+    Returns:
+        AppointmentRead | None: The appointment if found, otherwise None.
+    """
+    for appointment in self.appointments:
+      if appointment_id == appointment.id:
+        return appointment
+    return None
+  
   def validate_availability(self, new_appointment: AppointmentCreate) -> bool:
     """ 
     validates if a professional is available for the given time slot. 
@@ -66,9 +81,6 @@ class AppointmentService:
       return False
     return True
   
-  def create_appointment(self, appointment: AppointmentCreate):   
-    self.appointments.append(appointment)
-    
   def list_appointment(self):
     return self.appointments
   

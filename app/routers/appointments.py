@@ -19,3 +19,12 @@ def create_appointment(appointment: AppointmentCreate):
 @router.get("/", response_model=list[AppointmentRead], status_code=status.HTTP_200_OK, summary="List all appointments", description="List all appointments")
 def get_appointments():
   return appointment_service.list_appointment()
+
+@router.get("/{appointment_id}", response_model=AppointmentRead, status_code=status.HTTP_200_OK, summary="Get appointment by ID", description="Get appointment by ID. Return 404 if not found")
+def get_appointment_by_id(appointment_id: str):
+  appointment = appointment_service.get_appointment_by_id(appointment_id)
+  
+  if appointment is None:
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Appointment not found")
+  
+  return appointment
