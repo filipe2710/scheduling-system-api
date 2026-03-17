@@ -21,6 +21,11 @@ class AppointmentService:
     Returns:
         AppointmentRead: Created appointment with generated ID.
     """
+    if not self.validate_availability(appointment):
+      raise ValueError("Professional is not available for the given time slot.")
+    
+    if not self.validate_time_range(appointment):
+      raise ValueError("Start time must be before end time.")
     
     appointment_read = AppointmentRead(
       id=str(uuid4()),
