@@ -26,4 +26,17 @@ def get_appointment_by_id(appointment_id: str):
   if appointment is None:
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Appointment not found")
   
-  return appointment
+  return 
+
+@router.put("/{appointment_id}", response_model=AppointmentRead, status_code=status.HTTP_200_OK, summary="Update an appointment by ID", description="Update an appointment by ID. Return 404 if not found")
+def put_appointment_by_id(appointment_id: str, item: AppointmentUpdate):
+  try:
+    appointment = appointment_service.put_appointment_by_id(appointment_id, item)
+    
+    if appointment is None:
+      raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Appointment not found")
+    
+    return appointment
+  
+  except ValueError as e:
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
