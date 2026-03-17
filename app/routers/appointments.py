@@ -9,13 +9,12 @@ appointment_service = AppointmentService()
 
 @router.post("/", response_model=AppointmentRead, status_code=status.HTTP_201_CREATED, summary="Create a new appointment", description="Create a new appointment after validating availability")
 def create_appointment(appointment: AppointmentCreate):
-  if not appointment_service.validate_time_range(appointment):
-    raise HTTPException(status_code=400, detail="Start time must be before end time")
+  try:
+    return appointment_service.create_appointment(appointment)
  
-  appointment_service.create_appointment(appointment)
-  
-  return appointment
-
+  except ValueError as e:
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+ 
 @router.get("/", response_model=list[AppointmentRead], status_code=status.HTTP_200_OK, summary="List all appointments", description="List all appointments")
 def get_appointments():
   return appointment_service.list_appointment()
